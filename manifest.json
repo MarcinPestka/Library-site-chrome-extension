@@ -10,7 +10,7 @@
           "/content.js"
         ],
         "matches": [
-          "http://chamo.bg.ug.edu.pl:8080/*"
+          "http://chamo.bg.ug.edu.pl:8080/lib/item*"
         ]
       }
     ]

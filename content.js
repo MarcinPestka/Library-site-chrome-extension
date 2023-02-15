@@ -1,3 +1,14 @@
+setInterval(() => {
+  var arr = document.getElementsByClassName("title")
+
+  for (var i = 0; i < arr.length; i++) {
+      if (arr[i].nextElementSibling.nodeName != "BUTTON") {
+        myFunction(arr[i]);
+      }
+  };
+
+  }, 500);
+
 
 function unsecuredCopyToClipboard(text) {
     const textArea = document.createElement("textarea");
@@ -14,17 +25,16 @@ function unsecuredCopyToClipboard(text) {
   }
 
 function getBook(){
-    var tytul = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0].children[1].getElementsByTagName("a")[0].innerHTML.split(" /")[0]
-var autor = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0].children[0].getElementsByTagName("a")[0].innerHTML.split(" (")[0]
-var miasto = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0].children[2].getElementsByTagName("span")[0].innerHTML.split(" : ")[0]
-var wydawnictwo = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0].children[2].getElementsByTagName("span")[0].innerHTML.split(" : ")[1].split(",")[0]
-var rok = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0].children[2].getElementsByTagName("span")[0].innerHTML.split(" : ")[1].split(",")[1].substring(1,5)
-var pelny = tytul +" - "+autor + " wyd. " + wydawnictwo +" r. "+rok+ " " + miasto;
-
-return (pelny)
+    var div = document.getElementsByClassName("itemFields")[0].children[0].children[0].children[0];
+    var tytul = div.children[1].getElementsByTagName("a")[0].innerHTML.split(" /")[0]
+    var autor = div.children[0].getElementsByTagName("a")[0].innerHTML.split(" (")[0]
+    var miasto = div.children[2].getElementsByTagName("span")[0].innerHTML.split(" : ")[0]
+    var wydawnictwo = div.children[2].getElementsByTagName("span")[0].innerHTML.split(" : ")[1].split(",")[0]
+    var rok = div.children[2].getElementsByTagName("span")[0].innerHTML.split(",")[1].substring(1,5)
+    return (tytul +" - "+autor + " wyd. " + wydawnictwo +" r. "+rok+ " " + miasto)
 }
 
-function myFunction(){
+function myFunction(element){
 
         var button = document.createElement('button');
         button.innerHTML = 'Copy';
@@ -37,8 +47,5 @@ function myFunction(){
                 unsecuredCopyToClipboard(getBook());
             };
 
-            var header = document.getElementsByClassName("title")[0];
-            header.after(button);
+            element.after(button);
 }
-
-setTimeout(myFunction, 1000);
